@@ -14,23 +14,8 @@
 </head>
 
 <body class="invertedColors">
-  <div id="choosePhotoView">
-    <div id="choose">Tap to choose a photo...</div>
-    <input id="upload" type="file" accept="image/*" />
-  </div>
-  <div id="editPhotoView">
-    <div id="hint"><span>Edit and drag the text below,</span><br><span>take a screenshot, crop and share...</span></div>
-    <toggle-switch></toggle-switch>
-    <img id="image" />
-    <div id="textContainer">
-      <div id="name" contenteditable="true" class="draggable">Meher Sehgal</div>
-      <div id="born" contenteditable="true" class="draggable">born</div>
-      <div id="date" contenteditable="true" class="draggable">22nd Jan 2019</div>
-      <div id="time" contenteditable="true" class="draggable">2:00 PM</div>
-      <div id="weight" contenteditable="true" class="draggable">8 lbs.</div>
-      <div id="height" contenteditable="true" class="draggable">20 inches</div>
-    </div>
-  </div>
+  <choose-photo></choose-photo>
+  <edit-photo></edit-photo>
 
   <script type="module" src="main.js"></script>
 </body>

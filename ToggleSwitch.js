@@ -62,16 +62,7 @@ export default class ToggleSwitch extends HTMLElement {
     super();
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    this._changeListener = ((e) => {
-      this.dispatchEvent(
-        new CustomEvent("toggle", {
-          detail: {
-            value: e.target.checked
-          },
-          bubbles: true
-        })
-      );
-    });
+    this._changeListener = changeListener.bind(this);
   }
 
   connectedCallback() {
@@ -81,6 +72,18 @@ export default class ToggleSwitch extends HTMLElement {
   disconnectedCallback() {
     this.shadowRoot.querySelector('input').removeEventListener('change', this._changeListener);
   }
+}
+
+function changeListener (e) {
+  this.dispatchEvent(
+    new CustomEvent("toggle", {
+      detail: {
+        value: e.target.checked
+      },
+      bubbles: true,
+      composed: true
+    })
+  );
 }
 
 window.customElements.define('toggle-switch', ToggleSwitch);
