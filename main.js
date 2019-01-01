@@ -1,5 +1,5 @@
-import './ChoosePhoto.js';
-import './EditPhoto.js';
+import './views/ChoosePhoto.js';
+import './views/EditPhoto.js';
 
 const choosePhoto = document.querySelector('choose-photo');
 const editPhoto = document.querySelector('edit-photo');

@@ -1,6 +1,6 @@
-import './ToggleSwitch.js';
-import './DraggableContainer.js';
-import './DraggableItem.js';
+import '../components/ToggleSwitch.js';
+import '../components/DraggableContainer.js';
+import '../components/DraggableItem.js';
 
 const template = document.createElement('template');
 template.innerHTML = `
