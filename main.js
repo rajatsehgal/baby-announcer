@@ -1,4 +1,9 @@
-let container = document.querySelector("#container");
+import './ToggleSwitch.js';
+
+const choosePhotoView = document.getElementById('choosePhotoView');
+const editPhotoView = document.getElementById('editPhotoView');
+const textContainer = document.getElementById('textContainer');
+const toggleSwitch = document.querySelector('toggle-switch');
 
 let active = false;
 let currentX;
@@ -8,23 +13,23 @@ let initialY;
 let xOffset = 0;
 let yOffset = 0;
 
-container.addEventListener("touchstart", dragStart, false);
-container.addEventListener("mousedown", dragStart, false);
+textContainer.addEventListener('touchstart', dragStart, false);
+textContainer.addEventListener('mousedown', dragStart, false);
 
-container.addEventListener("touchend", dragEnd, false);
-container.addEventListener("mouseup", dragEnd, false);
+textContainer.addEventListener('touchend', dragEnd, false);
+textContainer.addEventListener('mouseup', dragEnd, false);
 
-container.addEventListener("touchmove", drag, false);
-container.addEventListener("mousemove", drag, false);
+textContainer.addEventListener('touchmove', drag, false);
+textContainer.addEventListener('mousemove', drag, false);
 
 
 function dragStart(e) {
-  const xPos = parseFloat(e.target.getAttribute("data-xpos"));
-  const yPos = parseFloat(e.target.getAttribute("data-ypos"));
+  const xPos = parseFloat(e.target.getAttribute('data-xpos'));
+  const yPos = parseFloat(e.target.getAttribute('data-ypos'));
   xOffset = xPos ? xPos : 0;
   yOffset = yPos ? yPos : 0;
 
-  if (e.type === "touchstart") {
+  if (e.type === 'touchstart') {
     initialX = e.touches[0].clientX - xOffset;
     initialY = e.touches[0].clientY - yOffset;
   } else {
@@ -32,7 +37,7 @@ function dragStart(e) {
     initialY = e.clientY - yOffset;
   }
 
-  if (e.target.classList.contains("draggable")) {
+  if (e.target.classList.contains('draggable')) {
     active = true;
   }
 }
@@ -40,8 +45,8 @@ function dragStart(e) {
 function dragEnd(e) {
   initialX = currentX;
   initialY = currentY;
-  e.target.setAttribute("data-xpos", xOffset);
-  e.target.setAttribute("data-ypos", yOffset);
+  e.target.setAttribute('data-xpos', xOffset);
+  e.target.setAttribute('data-ypos', yOffset);
 
   active = false;
 }
@@ -51,7 +56,7 @@ function drag(e) {
 
     e.preventDefault();
 
-    if (e.type === "touchmove") {
+    if (e.type === 'touchmove') {
       currentX = e.touches[0].clientX - initialX;
       currentY = e.touches[0].clientY - initialY;
     } else {
@@ -67,7 +72,7 @@ function drag(e) {
 }
 
 function setTranslate(xPos, yPos, el) {
-  el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+  el.style.transform = 'translate3d(' + xPos + 'px, ' + yPos + 'px, 0)';
 }
 
 const upload = document.getElementById('upload');
@@ -79,8 +84,14 @@ upload.addEventListener('change', (e) => {
 
     reader.onload = function (evt) {
       image.setAttribute('src', evt.target.result);
+      choosePhotoView.style.display = 'none';
+      editPhotoView.style.display = 'grid';
     };
 
     reader.readAsDataURL(files[0]);
   }
+});
+
+toggleSwitch.addEventListener('toggle', (e) => {
+  document.body.classList.toggle('invertedColors', e.detail.value);
 });
