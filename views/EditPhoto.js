@@ -44,7 +44,7 @@ draggable-container {
 </style>
 <div><span>Edit and drag the text below,</span><br><span>take a screenshot, crop and share...</span></div>
 <toggle-switch></toggle-switch>
-<img />
+<img draggable="false" />
 <draggable-container>
   <draggable-item id="name">Meher Sehgal</draggable-item>
   <draggable-item>born</draggable-item>

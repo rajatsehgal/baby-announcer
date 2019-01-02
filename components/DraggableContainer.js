@@ -14,6 +14,7 @@ template.innerHTML = `
 `;
 
 let active = false;
+let dragItem = null;
 let currentX;
 let currentY;
 let initialX;
@@ -62,33 +63,38 @@ export default class DraggableContainer extends HTMLElement {
 }
 
 function dragStart(e) {
-  const xPos = parseFloat(e.target.getAttribute('data-xpos'));
-  const yPos = parseFloat(e.target.getAttribute('data-ypos'));
-  xOffset = xPos ? xPos : 0;
-  yOffset = yPos ? yPos : 0;
+  if (e.target.nodeName === 'DRAGGABLE-ITEM') {
+    dragItem = e.target;
 
-  if (e.type === 'touchstart') {
-    initialX = e.touches[0].clientX - xOffset;
-    initialY = e.touches[0].clientY - yOffset;
-  } else {
-    initialX = e.clientX - xOffset;
-    initialY = e.clientY - yOffset;
+    const xPos = parseFloat(dragItem.getAttribute('data-xpos'));
+    const yPos = parseFloat(dragItem.getAttribute('data-ypos'));
+    xOffset = xPos ? xPos : 0;
+    yOffset = yPos ? yPos : 0;
+
+    if (e.type === 'touchstart') {
+      initialX = e.touches[0].clientX - xOffset;
+      initialY = e.touches[0].clientY - yOffset;
+    } else {
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+    }
+
+    active = true;
   }
-
-  active = true;
 }
 
 function dragEnd(e) {
   initialX = currentX;
   initialY = currentY;
-  e.target.setAttribute('data-xpos', xOffset);
-  e.target.setAttribute('data-ypos', yOffset);
+  dragItem.setAttribute('data-xpos', xOffset);
+  dragItem.setAttribute('data-ypos', yOffset);
 
+  dragItem = null;
   active = false;
 }
 
 function drag(e) {
-  if (active) {
+  if (active && dragItem) {
 
     e.preventDefault();
 
@@ -103,7 +109,7 @@ function drag(e) {
     xOffset = currentX;
     yOffset = currentY;
 
-    setTranslate(currentX, currentY, e.target);
+    setTranslate(currentX, currentY, dragItem);
   }
 }
 
