@@ -16,7 +16,7 @@ template.innerHTML = `
   display: none;
 }
 </style>
-<slot>
+<slot contenteditable>
 `;
 
 export default class DraggableItem extends HTMLElement {
@@ -24,6 +24,7 @@ export default class DraggableItem extends HTMLElement {
     super();
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.contentEditable = 'true';
   }
 }
 
