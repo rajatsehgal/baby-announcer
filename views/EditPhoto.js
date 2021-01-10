@@ -46,12 +46,12 @@ draggable-container {
 <toggle-switch></toggle-switch>
 <img draggable="false" />
 <draggable-container>
-  <draggable-item id="name">Meher Sehgal</draggable-item>
+  <draggable-item id="name">Anya Sehgal</draggable-item>
   <draggable-item>born</draggable-item>
-  <draggable-item>22nd Jan 2019</draggable-item>
-  <draggable-item>2:00 PM</draggable-item>
-  <draggable-item>7 lbs.</draggable-item>
-  <draggable-item>20 inches</draggable-item>
+  <draggable-item>22nd Jan 2021</draggable-item>
+  <draggable-item>10:30 AM</draggable-item>
+  <draggable-item>7 lbs. 11 oz.</draggable-item>
+  <draggable-item>21 inches</draggable-item>
 </draggable-container>
 `;
 
